@@ -1,0 +1,137 @@
+/* Basic reset so box-sizing behaves predictably */
+* { box-sizing: border-box; }
+
+/* BODY
+   - Centers the app and gives the page background color.
+   - `padding-top` prevents the card from hugging the top of the viewport.
+*/
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background-color: #03488d;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  margin: 0;
+  padding-top: 40px;
+}
+
+/* APP CONTAINER
+   - White card with padding, rounded corners and shadow to look like a centered panel.
+*/
+.app-container {
+  background: rgb(255, 255, 255);
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 6px 22px rgba(0,0,0,0.08);
+  width: 90%;
+  max-width: 760px;
+  animation: fadeIn 0.5s ease;
+}
+
+/* TITLES */
+h1 { text-align: center; margin: 0 0 20px; color: #2c3e50; font-size: 3em;}
+h2 { color: #34495e; margin: 24px 0 10px; font-size: 18px; }
+
+/* INPUT ROW (3 columns)
+   - 1fr (flexible) for task name, fixed widths for date and add button.
+*/
+.input-row {
+  display: grid;
+  grid-template-columns: 1fr 212px 110px;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+/* BASIC INPUT STYLES */
+.input, .due-date {
+  padding: 10px;
+  border: 1px solid #d6dce5;
+  border-radius: 8px;
+  font-size: 15px;
+  width: 100%;
+}
+
+/* BUTTONS - Add/Delete/Clear styles
+   - color and hover states are defined for affordance
+*/
+.add-button, .delete-button, .clear-all-button {
+  border: none;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+  border-radius: 6px;
+  padding: 10px 12px;
+}
+
+/* Add button - green */
+.add-button { background: #016e2f; padding: 12px 12px; }
+.add-button:hover { background-color: #039941; }
+
+/* Clear All button - orange with slight hover scale */
+.clear-all-button {
+  background-color: #dd8a04;
+  font-size: 17px;
+  padding: 10px 23px;
+  margin-top: 10px;
+  transform: scale(1);
+}
+.clear-all-button:hover { 
+  background-color: #d56a0d;
+  transform: scale(1.05); 
+}
+
+/* Delete button - red */
+.delete-button {   background: #8e1204;   padding: 11px 30px; }
+.delete-button:hover { background: #c41906; }
+
+/* CONTROLS area (sort + clear) */
+.controls { display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom: 6px; }
+.sort-controls { display:flex; align-items:center; gap:8px; }
+.sort-controls label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #4f4c4c;
+}
+.sort-controls select {
+  padding:6px 10px; border-radius:8px; border:1px solid #d6dce5; cursor:pointer;
+}
+
+/* TODO ITEM ROW (4 columns)
+   - Columns: checkbox (30px), text (flex), date (210px), action (110px)
+   - `todo-item` used for pending rows, `completed-item` for completed rows.
+*/
+.todo-item, .completed-item {
+  display: grid;
+  grid-template-columns: 30px 1fr 210px 110px;
+  gap: 12px;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #eef2f6;
+}
+
+/* Text overflow handling so long tasks don't break layout */
+.todo-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Completed text styling */
+.todo-text.completed { text-decoration: line-through; color:#8b98a6; }
+
+/* Checkbox look */
+.checkbox { width:18px; height:18px; cursor:pointer; accent-color:#067a3f; }
+
+/* Completed list container background */
+.completed-list { background:#fcfdfe; border-radius:8px;}
+
+/* Responsive adjustments for narrow screens */
+@media (max-width:600px) {
+  .input-row { grid-template-columns: 1fr 140px 80px; }
+  .todo-item { grid-template-columns: 28px 1fr 120px 80px; }
+}
+
+/* Simple fade-in animation applied to the main card */
+@keyframes fadeIn { from { opacity:0; transform: translateY(6px) } to { opacity:1; transform:none } }

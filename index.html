@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>My Todo List ✅</title>
+  <!-- Link to stylesheet (relative path to /Styles/style.css) -->
+  <link rel="stylesheet" href="./Styles/style.css" />
+</head>
+<body>
+  <!-- Main app container: centered card that holds the UI -->
+  <div class="app-container">
+    <h1>My To-Do List</h1>
+
+    <!-- INPUT ROW
+         - This row uses a 3-column grid (text input, date input, add button).
+         - onkeydown on inputs calls eventKeydown(event) so Enter key adds tasks.
+    -->
+    <div class="input-row">
+      <input placeholder="Todo name" class="js-input input" onkeydown="eventKeydown(event)">
+      <input type="date" class="js-due-date due-date" onkeydown="eventKeydown(event)">
+      <button class="add-button" onclick="addTodo()">Add</button>
+    </div>
+
+    <!-- CONTROLS
+         - Sort select triggers sortTodos(value).
+         - Clear All button removes everything (with confirmation).
+    -->
+    <div class="controls">
+      <div class="sort-controls">
+        <label for="sortSelect">Sort by:</label>
+        <select id="sortSelect" onchange="sortTodos(this.value)">
+          <option value="default">Default</option>
+          <option value="date">Due Date</option>
+          <!-- <option value="completed">Completed</option> -->
+        </select>
+      </div>
+      <button class="clear-all-button" onclick="clearAll()">Clear All</button>
+    </div>
+
+    <!-- PENDING TASKS
+         - Shows count in #pendingCount
+         - Tasks rendered into .js-todo-list by renderTodoList()
+    -->
+    <h2>Pending Tasks (<span id="pendingCount">0</span>)</h2>
+    <div class="todo-list js-todo-list"></div>
+
+    <!-- COMPLETED TASKS
+         - Shows count in #completedCount
+         - Completed items rendered into .js-completed-list
+    -->
+    <h2>Completed Tasks (<span id="completedCount">0</span>)</h2>
+    <div class="completed-list js-completed-list"></div>
+  </div>
+
+  <!-- Main app logic -->
+  <script src="./Logics/logic.js"></script>
+</body>
+</html>
